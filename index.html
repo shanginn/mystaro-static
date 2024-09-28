@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мадам Мистаро - Онлайн расклады Таро</title>
+    <meta name="description" content="Онлайн расклады Таро с помощью бота Мадам Мистаро в Telegram. Узнайте свое будущее и получите советы от карт Таро.">
+    <meta name="keywords" content="таро, гадание, расклады таро, мадам мистаро, telegram бот, гадания онлайн, прогнозы, предсказания, карты таро">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap";
+        @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+
+        :root {
+            --primary-color: #8A2BE2;
+            --secondary-color: #4B0082;
+            --accent-color: #FFD700;
+            --text-color: #FFFFFF;
+            --background-color: #1A0033;
+            --bulma-block-spacing: 1rem;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, .title, .subtitle {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color);
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            background: transparent;
+        }
+
+        .hero-body {
+            padding: 6rem 1.5rem;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px auto;
+            border-radius: 50%;
+            background-image: url('/assets/logo.webp');
+            background-size: cover;
+            background-position: center;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .button {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            transform: scale(1.05);
+        }
+
+        .section {
+            background-color: rgba(26, 0, 51, 0.7);
+            position: relative;
+            z-index: 1;
+            padding: 80px 0;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            width: 48px;
+            height: 48px;
+        }
+
+        .testimonial {
+            background-color: rgba(75, 0, 130, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: rgba(26, 0, 51, 0.9);
+            padding: 40px 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hero-body {
+                padding: 3rem 1rem;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .title.is-1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle.is-3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            background: url('/assets/bg2.webp') no-repeat center left;
+            background-size: cover;
+        }
+
+        .hero-body {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 6rem 1.5rem;
+            border-radius: 10px;
+        }
+
+        .section.testimonials {
+            background: url('/assets/bg1.webp') no-repeat center center;
+            background-size: cover;
+        }
+
+        .bg2 {
+            background: url('/assets/bg2.webp') no-repeat bottom center;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<section class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered is-max-tablet">
+            <div class="logo"></div>
+            <h1 class="title is-1">Мадам Мистаро</h1>
+            <h2 class="subtitle is-3">Ваш проводник в мир Таро</h2>
+            <p class="is-size-5 mb-5">Погрузитесь в тайны карт и получите персональный расклад Таро прямо сейчас с помощью нашего уникального Telegram-бота.</p>
+            <a href="tg://resolve?domain=mystaro_bot&start=landing_top" class="button is-large is-rounded">Начать путешествие</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h3 class="title is-2 has-text-centered mb-6">Откройте Завесу Тайн</h3>
+        <div class="columns is-multiline">
+            <div class="column is-4 has-text-centered">
+                    <span class="icon feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </span>
+                <h4 class="title is-4">Мгновенные Предсказания</h4>
+                <p>Получайте глубокие прозрения сразу после вашего запроса.</p>
+            </div>
+            <div class="column is-4 has-text-centered">
+                    <span class="icon feature-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </span>
+                <h4 class="title is-4">Персональный Подход</h4>
+                <p>Каждый расклад уникален и адаптирован под ваши личные запросы.</p>
+            </div>
+            <div class="column is-4 has-text-centered">
+                    <span class="icon feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </span>
+                <h4 class="title is-4">Полная Конфиденциальность</h4>
+                <p>Ваши вопросы и предсказания остаются строго между вами и картами.</p>
+            </div>
+            <div class="column is-4 has-text-centered">
+                    <span class="icon feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </span>
+                <h4 class="title is-4">Доступно 24/7</h4>
+                <p>Получайте ответы в любое время дня и ночи.</p>
+            </div>
+            <div class="column is-4 has-text-centered">
+                <span class="icon feature-icon">
+                    <i class="fas fa-compass"></i>
+                </span>
+                <h4 class="title is-4">Ориентир для Будущего</h4>
+                <p>Предсказания помогают лучше понять ваш путь и принять важные решения.</p>
+            </div>
+            <div class="column is-4 has-text-centered">
+                    <span class="icon feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </span>
+                <h4 class="title is-4">Глубокие Инсайты</h4>
+                <p>Не просто предсказания, а мудрые советы для вашего пути.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section testimonials">
+    <div class="container">
+        <h3 class="title is-2 has-text-centered mb-6">Отзывы Наших Клиентов</h3>
+        <div class="columns is-multiline">
+            <div class="column is-4">
+                <div class="testimonial">
+                    <p>"Мадам Мистаро открыла мне глаза на ситуацию, которую я не могла разрешить годами. Спасибо за точность и глубину!"</p>
+                    <p class="has-text-right">- Анна К.</p>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="testimonial">
+                    <p>"Я скептически относился к онлайн-гаданиям, но Мадам Мистаро меня удивила. Она помогла мне понять свои чувства и принять осознанные решения. Это невероятный опыт."</p>
+                    <p class="has-text-right">- Михаил Д.</p>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="testimonial">
+                    <p>"Использую бот каждый день для получения совета. С помощью Мадам Мистаро я поняла, как лучше справляться с повседневными проблемами. Её советы всегда дают пищу для размышлений."</p>
+                    <p class="has-text-right">- Елена С.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h3 class="title is-2 has-text-centered mb-6">Часто Задаваемые Вопросы</h3>
+        <div class="columns is-multiline">
+            <div class="column is-6">
+                <div class="faq-item">
+                    <p class="faq-question">Как начать пользоваться ботом Мадам Мистаро?</p>
+                    <p>Просто перейдите по ссылке в Telegram и начните чат с ботом. Задайте вопрос для получения вашего первого расклада.</p>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="faq-item">
+                    <p class="faq-question">Сколько стоит использование бота?</p>
+                    <p>Попробовать вы можете бесплатно. Для доступа к большим лимитам поддержите проект, об этом вы можете узнать непосредственно в боте.</p>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="faq-item">
+                    <p class="faq-question">Насколько точны предсказания?</p>
+                    <p>Я не знаю будущего и не могу предсказать его, я могу только попробовать помочь тебе лучше понять себя и свои желания.</p>
+                </div>
+            </div>
+            <div class="column is-6">
+                <div class="faq-item">
+                    <p class="faq-question">Могу ли я задавать любые вопросы?</p>
+                    <p>Да, вы можете задавать вопросы на любые темы, которые вас интересуют. Однако помни, что Твоя жизнь - это твоя ответственность, и тебе решать, как её жить.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg2">
+    <div class="container has-text-centered">
+        <h3 class="title is-2 mb-6">Готовы Заглянуть в Будущее?</h3>
+        <p class="is-size-5 mb-5">Не упустите шанс получить ответы на ваши самые важные вопросы. Мадам Мистаро ждет вас!</p>
+        <a href="tg://resolve?domain=mystaro_bot&start=landing_bottom" class="button is-large is-rounded">Начать гадание</a>
+    </div>
+</section>
+</body>
+</html>
