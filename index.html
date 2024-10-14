@@ -60,16 +60,6 @@
             color: var(--text-color);
         }
 
-        .hero {
-            position: relative;
-            z-index: 1;
-            background: transparent;
-        }
-
-        .hero-body {
-            padding: 6rem 1.5rem;
-        }
-
         .logo {
             width: 200px;
             height: 200px;
@@ -140,10 +130,6 @@
         }
 
         @media screen and (max-width: 768px) {
-            .hero-body {
-                padding: 3rem 1rem;
-            }
-
             .logo {
                 width: 150px;
                 height: 150px;
@@ -159,16 +145,12 @@
         }
 
         .hero {
-            position: relative;
-            z-index: 1;
             background: url('/assets/bg2.webp') no-repeat center left;
             background-size: cover;
         }
 
-        .hero-body {
+        .hero-body, .hero-foot {
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 6rem 1.5rem;
-            border-radius: 10px;
         }
 
         .section.testimonials {
@@ -243,6 +225,11 @@
             <h2 class="subtitle is-3">Ваш проводник в мир Таро</h2>
             <p class="is-size-5 mb-5">Погрузитесь в тайны карт и получите персональный расклад Таро прямо сейчас с помощью нашего уникального Telegram-бота.</p>
             <a href="tg://resolve?domain=mystaro_bot&start=landing_top" class="button is-large is-rounded">Начать путешествие</a>
+        </div>
+    </div>
+    <div class="hero-foot">
+        <div class="content has-text-grey-dark is-size-7-mobile">
+            Пользуясь сервисом вы подтверждаете, что вам есть 18 лет и вы соглашаетесь с <a class="has-text-grey-dark" href="/оферта">договором оферты</a>
         </div>
     </div>
 </section>
