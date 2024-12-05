@@ -1,25 +1,109 @@
----
-permalink: /404.html
-layout: default
----
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>404 - Страница не найдена | Мадам Мистаро</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap";
+    @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+    :root {
+      --primary-color: #8A2BE2;
+      --secondary-color: #4B0082;
+      --accent-color: #FFD700;
+      --text-color: #FFFFFF;
+      --background-color: #1A0033;
+    }
 
-<div class="container">
-  <h1>404</h1>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+    .hero {
+      background: url('/assets/bg2.webp') no-repeat center center;
+      background-size: cover;
+    }
+
+    .hero-body {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 3rem 1.5rem;
+    }
+
+    .title, .subtitle {
+      font-family: 'Playfair Display', serif;
+      color: var(--text-color);
+    }
+
+    .error-code {
+      font-size: 8rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      margin-bottom: 1rem;
+    }
+
+    .tarot-card {
+      font-size: 6rem;
+      color: var(--accent-color);
+      margin-bottom: 2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .button {
+      background-color: var(--accent-color);
+      color: var(--secondary-color);
+      font-weight: bold;
+      border: none;
+      transition: all 0.3s ease;
+      margin-top: 2rem;
+    }
+
+    .button:hover {
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      transform: scale(1.05);
+    }
+
+    .message {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+<section class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="tarot-card">
+        <i class="fas fa-cards"></i>
+      </div>
+      <h1 class="error-code">404</h1>
+      <h2 class="title is-3">Карты говорят, что страница потерялась в тумане времени</h2>
+      <p class="message">Похоже, вы забрели на неизведанную территорию. Позвольте картам направить вас обратно.</p>
+      <a href="/" class="button is-large is-rounded">
+                    <span class="icon">
+                        <i class="fas fa-home"></i>
+                    </span>
+        <span>Вернуться на главную</span>
+      </a>
+    </div>
+  </div>
+</section>
+</body>
+</html>
