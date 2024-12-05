@@ -171,6 +171,7 @@ PLATFORMS
 
 DEPENDENCIES
   http_parser.rb (~> 0.6.0)
+  i18n
   jekyll (~> 4.3.4)
   jekyll-feed (~> 0.12)
   minima (~> 2.5)
