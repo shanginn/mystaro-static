@@ -1,0 +1,69 @@
+# Site settings
+title: Мадам Мистаро
+email: # leave empty if you don't want to display
+description: >- # this means to ignore newlines until "baseurl:"
+  Бесплатные расклады Таро с помощью бота Мадам Мистаро в Telegram. 
+  Получите советы от карт Таро.
+baseurl: "" # the subpath of your site
+url: "https://мистаро.рф"
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+
+# Timezone
+timezone: Europe/Moscow
+
+collections:
+  horoscopes:
+    output: true
+    permalink: /гороскопы/:year/:month/:day
+    sort_by: date
+
+# Default configurations for horoscopes
+defaults:
+  -
+    scope:
+      path: ""
+      type: "horoscopes"
+    values:
+      layout: "horoscope"
+      lang: "ru"
+      author: "Мадам Мистаро"
+
+# Keep your HTML files as-is
+include:
+  - "*.html"
+  - "_pages"
+  - "assets"
+
+# Exclude files and folders
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - .git/
+  - .idea/
+  - README.md
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+# Sass settings
+sass:
+  style: compressed
+
+# Custom variables
+telegram_bot: mystaro_bot
+
+# SEO settings
+lang: ru-RU
