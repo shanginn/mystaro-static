@@ -212,6 +212,38 @@
 
             font-size: 14px;
         }
+
+        .horoscope-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .horoscope-link:hover {
+            color: var(--text-color);
+            text-shadow: 0 0 8px var(--accent-color);
+        }
+
+        .horoscope-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+
+        .horoscope-link:hover::before {
+            width: 80%;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -224,7 +256,10 @@
             <h1 class="title is-1">Мадам Мистаро</h1>
             <h2 class="subtitle is-3">Ваш проводник в мир Таро</h2>
             <p class="is-size-5 mb-5">Погрузитесь в тайны карт и получите персональный расклад Таро прямо сейчас с помощью нашего уникального Telegram-бота.</p>
-            <a href="tg://resolve?domain=mystaro_bot&start=landing_top" class="button is-large is-rounded">Начать путешествие</a>
+            <a href="tg://resolve?domain=mystaro_bot&start=landing_top" class="button is-large is-rounded">Сделать расклад бесплатно</a>
+            <div class="mt-4">
+                <a href="/гороскопы" class="horoscope-link has-text-warning is-size-5 has-text-weight-medium hover:underline">Посмотреть гороскоп на сегодня</a>
+            </div>
         </div>
     </div>
     <div class="hero-foot">
