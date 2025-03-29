@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.card_name | default: page.title }} - Карта Дня {{ page.date | date: "%d.%m.%Y" }} | {{ site.title }}</title>
+    <meta name="description" content="{{ page.interpretation | strip_html | truncatewords: 30 | default: site.description }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        @import "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap";
+        @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+
+        :root {
+            --primary-color: #8A2BE2;
+            --secondary-color: #4B0082;
+            --accent-color: #FFD700;
+            --text-color: #FFFFFF;
+            --background-color: #1A0033;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4, .title, .subtitle {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Logo styles */
+        .logo-wrapper { padding-top: 1rem; text-align: center; }
+        .logo-small { width: 100px; height: 100px; border-radius: 50%; background-image: url('/assets/logo.webp'); background-size: cover; background-position: center; border: 3px solid var(--accent-color); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; display: inline-block; }
+        .logo-small:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+
+        /* Header styles */
+        .header { text-align: center; }
+        .header-content { max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
+        .header-text .title { font-size: 2.5rem; margin-bottom: 1rem; line-height: 1.2; text-align: center; }
+        .header-text .current-date { font-size: 1.2rem; color: var(--accent-color); margin-top: 0.5rem; }
+
+        /* --- Tarot Content Specific Styles --- */
+        .tarot-content {
+            background: rgba(75, 0, 130, 0.3);
+            border-radius: 15px;
+            padding: 3rem; /* Default padding */
+            margin: 2rem auto;
+            max-width: 1000px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tarot-card-image-container {
+            margin: 0 auto 1.5rem auto; /* Centers image within its column */
+            /* Ensure no max-width is set here */
+        }
+
+        .tarot-card-image {
+            border-radius: 10px;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            width: 100%; /* Fill column width */
+            height: auto; /* Maintain aspect ratio */
+            display: block;
+        }
+
+        .card-name { /* Alignment now handled by Bulma classes on the element */
+            color: var(--accent-color);
+            margin-bottom: 1.5rem !important;
+        }
+
+        .card-section { /* Keeping for interpretation spacing */
+            margin-bottom: 2rem;
+        }
+        /* Ensure first paragraph of interpretation doesn't have extra top margin */
+        .interpretation-section .content > p:first-child {
+            margin-top: 0;
+        }
+
+        /* Styling for Interpretation text */
+        .interpretation-section .content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+        .interpretation-section .content p {
+            margin-bottom: 1rem;
+        }
+        .interpretation-section .content > *:last-child {
+            margin-bottom: 0;
+        }
+        .additional-content .content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin-top: 2rem;
+        }
+        .additional-content .content p {
+            margin-bottom: 1rem;
+        }
+        .additional-content .content > *:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Date Navigation styles */
+        .date-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem auto 0 auto;
+            max-width: 1000px;
+            padding: 0 1rem;
+            min-height: 3em;
+        }
+        .date-nav-link { padding: 0.75rem 1rem; color: var(--text-color); text-decoration: none; font-weight: normal; transition: all 0.3s ease; border: none; font-size: 1rem; opacity: 0.7; display: flex; align-items: center; gap: 0.5rem; }
+        .date-nav-link:hover { opacity: 1; color: var(--accent-color) !important; transform: translateX(0); background-color: transparent; }
+        .date-nav-link i { font-size: 0.8em; transition: transform 0.3s ease; }
+        .date-nav-link:hover i.fa-chevron-left { transform: translateX(-5px); }
+        .date-nav-link:hover i.fa-chevron-right { transform: translateX(5px); }
+
+        /* Telegram Button styles */
+        .telegram-button { display: inline-block; padding: 1.2rem 2.5rem; background-color: var(--accent-color); color: var(--secondary-color) !important; font-weight: bold; border: none; border-radius: 9999px; font-size: 1.3rem; text-decoration: none; transition: all 0.3s ease; margin: 2rem 0; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .telegram-button:hover { background-color: var(--primary-color); color: var(--text-color) !important; transform: scale(1.05); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+
+        /* Footer styles */
+        footer { text-align: center; }
+
+        /* Media Queries - Now mostly for font sizes, padding, etc. */
+        @media screen and (max-width: 768px) { /* Affects mobile only */
+            .header-text .title { font-size: 2rem; }
+            .tarot-content { padding: 1.5rem; margin: 1rem; } /* Adjust padding on smaller screens */
+            .card-name { font-size: 1.8rem; margin-bottom: 1rem !important; }
+            .interpretation-section .content { font-size: 1rem; }
+            .additional-content .content { font-size: 1rem; }
+            .telegram-button { font-size: 1.2rem; padding: 1rem 2rem; }
+            .date-navigation { margin-top: 1.5rem; }
+        }
+        @media screen and (max-width: 1023px) { /* Affects mobile AND tablet */
+            .tarot-content { padding: 2rem; } /* Slightly more padding on tablet than mobile */
+        }
+
+    </style>
+</head>
+<body>
+<div class="logo-wrapper">
+    <a href="/" title="На главную" class="logo-link">
+        <div class="logo-small" role="img" aria-label="Мадам Мистаро логотип"></div>
+    </a>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <div class="header-text">
+                <h1 class="title">Карта Дня</h1>
+                <div class="current-date">{{ page.date | date: "%d.%m.%Y" }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content area -->
+    <main class="tarot-content">
+        <!-- Added is-multiline -->
+        <div class="columns is-vcentered is-multiline">
+
+            <!-- Card Image Column - Classes control responsiveness -->
+            <div class="column is-full-mobile is-full-tablet is-one-third-desktop">
+                {% if page.card_image %}
+                <figure class="image tarot-card-image-container">
+                    <img src="{{ page.card_image | relative_url }}" alt="{{ page.card_name }} - Карта Дня" class="tarot-card-image">
+                </figure>
+                {% else %}
+                <div class="notification is-warning">Изображение карты не найдено.</div>
+                {% endif %}
+            </div>
+
+            <!-- Card Details Column - Takes remaining space -->
+            <div class="column">
+                {% if page.card_name %}
+                <!-- Alignment now handled by Bulma helper classes -->
+                <h2 class="title is-3 card-name has-text-centered-mobile has-text-centered-tablet has-text-left-desktop">
+                    {{ page.card_name }}
+                </h2>
+                {% endif %}
+
+                {% if page.interpretation %}
+                <div class="card-section interpretation-section">
+                    <div class="content">
+                        {{ page.interpretation | markdownify }}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if content and content != "" %}
+                <div class="card-section additional-content">
+                    <div class="content">
+                        {{ content }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    {% if page.previous or page.next %}
+    <div class="date-navigation">
+        {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}" class="date-nav-link">
+            <i class="fas fa-chevron-left"></i> Предыдущий день
+        </a>
+        {% else %}
+        <div></div>
+        {% endif %}
+
+        {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}" class="date-nav-link">
+            Следующий день <i class="fas fa-chevron-right"></i>
+        </a>
+        {% else %}
+        <div></div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <footer class="has-text-centered">
+        <a href="tg://resolve?domain={{ site.telegram_bot }}&start=create_unique_card" class="telegram-button">
+            Сделать свою уникальную карту
+        </a>
+    </footer>
+</div>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(98489625, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+    });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/98489625" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</body>
+</html>

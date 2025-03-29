@@ -1,26 +1,30 @@
 title: Мадам Мистаро
 email: # leave empty if you don't want to display
 description: >- # this means to ignore newlines until "baseurl:"
-  Бесплатные расклады Таро с помощью бота Мадам Мистаро в Telegram. 
+  Бесплатные расклады Таро с помощью бота Мадам Мистаро в Telegram.
   Получите советы от карт Таро.
-baseurl: "" # the subpath of your site
+baseurl: ""
 url: "https://мистаро.рф"
 
-# Build settings
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-responsive-image
 
-# Timezone
 timezone: Europe/Moscow
 
 collections:
   horoscopes:
     output: true
-    permalink: /%D0%B3%D0%BE%D1%80%D0%BE%D1%81%D0%BA%D0%BE%D0%BF%D1%8B/:year/:month/:day
+    # Permalink uses URL encoding for "гороскопы"
+    permalink: /%D0%B3%D0%BE%D1%80%D0%BE%D1%81%D0%BA%D0%BE%D0%BF%D1%8B/:year/:month/:day/
+    sort_by: date
+  tarot:
+    output: true
+    # Permalink uses URL encoding for "карта-дня"
+    permalink: /%D0%BA%D0%B0%D1%80%D1%82%D0%B0-%D0%B4%D0%BD%D1%8F/:year/:month/:day/
     sort_by: date
 
-# Default configurations for horoscopes
 defaults:
   -
     scope:
@@ -30,14 +34,20 @@ defaults:
       layout: "horoscope"
       lang: "ru"
       author: "Мадам Мистаро"
+  -
+    scope:
+      path: ""
+      type: "tarot"
+    values:
+      layout: "tarot"
+      lang: "ru"
+      author: "Мадам Мистаро"
 
-# Keep your HTML files as-is
 include:
   - "*.html"
   - "_pages"
   - "assets"
 
-# Exclude files and folders
 exclude:
   - .sass-cache/
   - .jekyll-cache/
@@ -50,19 +60,22 @@ exclude:
   - .idea/
   - README.md
 
-# Markdown settings
 markdown: kramdown
 kramdown:
   input: GFM
   hard_wrap: false
   syntax_highlighter: rouge
 
-# Sass settings
 sass:
   style: compressed
 
-# Custom variables
+responsive_image:
+  template: _includes/responsive-image.html
+  sizes:
+    - width: 240
+  default_quality: 85
+  output_path_format: assets/resized/%{filename}-%{width}x%{height}.%{extension}
+
 telegram_bot: mystaro_bot
 
-# SEO settings
 lang: ru-RU

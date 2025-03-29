@@ -1,10 +1,12 @@
+---
+---
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Мадам Мистаро - Онлайн расклады Таро</title>
-    <meta name="description" content="Онлайн расклады Таро с помощью бота Мадам Мистаро в Telegram. Узнайте свое будущее и получите советы от карт Таро.">
-    <meta name="keywords" content="таро, гадание, расклады таро, мадам мистаро, telegram бот, гадания онлайн, прогнозы, предсказания, карты таро">
+    <title>Мадам Мистаро - Онлайн расклады Таро и Карта Дня</title>
+    <meta name="description" content="Онлайн расклады Таро с помощью бота Мадам Мистаро в Telegram. Узнайте свое будущее, получите советы от карт Таро и смотрите ежедневную Карту Дня.">
+    <meta name="keywords" content="таро, гадание, расклады таро, мадам мистаро, telegram бот, гадания онлайн, прогнозы, предсказания, карты таро, карта дня, ежедневное таро">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -42,276 +44,295 @@
             --accent-color: #FFD700;
             --text-color: #FFFFFF;
             --background-color: #1A0033;
+            /* Define tarot preview background color for reuse in gradient */
+            --tarot-preview-bg: rgba(75, 0, 130, 0.4);
+            --tarot-preview-bg-hover: rgba(75, 0, 130, 0.7);
             --bulma-block-spacing: 1rem;
         }
 
-        html, body {
-            margin: 0;
-            padding: 0;
+        /* --- General Styles --- */
+        html, body { margin: 0; padding: 0; font-family: 'Roboto', sans-serif; color: var(--text-color); background-color: var(--background-color); overflow-x: hidden; min-height: 100vh; line-height: 1.6; }
+        h1, h2, h3, h4, .title, .subtitle { font-family: 'Playfair Display', serif; color: var(--text-color); }
+        .logo { width: 200px; height: 200px; margin: 0 auto 40px auto; border-radius: 50%; background-image: url('/assets/logo.webp'); background-size: cover; background-position: center; border: 4px solid var(--accent-color); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .logo:hover { transform: scale(1.1); box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+        .button { background-color: var(--accent-color); color: var(--secondary-color); font-weight: bold; border: none; transition: all 0.3s ease; }
+        .button:hover { background-color: var(--primary-color); color: var(--text-color); transform: scale(1.05); }
+        .section { position: relative; z-index: 1; padding: 80px 1.5rem; }
+        .section.section-transparent-bg { background-color: rgba(26, 0, 51, 0.7); }
+        .feature-icon { font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem; width: 48px; height: 48px; display: inline-block; }
+        .testimonial { background-color: rgba(75, 0, 130, 0.6); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .faq-item { margin-bottom: 20px; }
+        .faq-question { font-weight: bold; color: var(--accent-color); margin-bottom: 10px; }
+        footer { background-color: rgba(26, 0, 51, 0.9); padding: 40px 0; }
+        .hero { background: url('/assets/bg2.webp') no-repeat center center; background-size: cover; }
+        .hero-body, .hero-foot { background-color: rgba(0, 0, 0, 0.5); }
+        .section.testimonials { background: url('/assets/bg1.webp') no-repeat center center; background-size: cover; }
+        .section.tariffs { background-color: var(--background-color); }
+        .bg2 { background: url('/assets/bg2.webp') no-repeat bottom center; background-size: cover; }
+        .tariff-card { position: relative; background-color: rgba(75, 0, 130, 0.6); border-radius: 10px; color: var(--text-color); height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+        .tariff-card .card-image { padding-top: 1.5rem; }
+        .tariff-card .card-content { flex-grow: 1; padding-bottom: 0.5rem; }
+        .tariff-card .card-content .title { margin-bottom: 0.5rem; }
+        .tariff-card .card-content .is-size-5 { margin-bottom: 0.25rem; line-height: 1.3; }
+        .tariff-card .card-content small { display: block; margin-top: 0.25rem; opacity: 0.8; }
+        .tariff-icon { width: 128px; height: 128px; border-radius: 50%; border: 4px solid var(--accent-color); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .tariff-card .button { background-color: var(--accent-color); color: var(--secondary-color); font-weight: bold; border: none; transition: all 0.3s ease; }
+        .tariff-card .button:hover { background-color: var(--primary-color); color: var(--text-color); transform: scale(1.05); }
+        .commercial-badge { position: absolute; top: 10px; right: -40px; transform: rotate(38deg); z-index: 1; background: url('/assets/bg1.webp') no-repeat left center; background-size: cover; color: var(--text-color); padding: 5px 10px; font-weight: bold; border-radius: 5px; text-align: center; line-height: 1.2; font-size: 13px; width: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .hero-foot .content { padding: 1rem; text-align: center; }
+
+
+        /* --- Styles for Enhanced Clickable Daily Tarot Card Preview --- */
+        .daily-tarot-preview { /* The A tag */
+            display: flex;
+            gap: 1.5rem;
+            background-color: var(--tarot-preview-bg);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none !important;
+            color: var(--text-color) !important;
+            max-width: 700px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            align-items: stretch;
+        }
+
+        .daily-tarot-preview:hover {
+            background-color: var(--tarot-preview-bg-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        .daily-tarot-image-column {
+            flex: 0 0 160px;
+            display: flex;
+            align-items: center;
+        }
+
+        .daily-tarot-thumbnail { /* The IMG tag generated by the plugin */
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 215, 0, 0.6);
+        }
+
+        .daily-tarot-text-column {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes footer down */
+        }
+
+        /* Wrapper for main text content (heading, name, excerpt) */
+        .daily-tarot-text-main {
+            flex-grow: 1; /* Allow this section to take space */
+        }
+
+        .daily-tarot-text-column .heading {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.3rem;
             font-family: 'Roboto', sans-serif;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            overflow-x: hidden;
-            min-height: 100vh;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        h1, h2, h3, h4, .title, .subtitle {
+        .daily-tarot-text-column .card-name {
             font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--accent-color);
+            line-height: 1.3;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .interpretation-excerpt {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            /* opacity: 0.9; We rely on the mask now, so full opacity is fine */
+            max-height: 6.4em; /* Approx 4 lines (1.6 * 4) - adjust as needed */
+            overflow: hidden; /* Still needed to clip content */
+            margin-bottom: 0.5rem; /* Space between excerpt and footer */
+
+            /* Apply the mask for text fading */
+            -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%); /* Start fade earlier */
+            mask-image: linear-gradient(to bottom, black 30%, transparent 100%); /* Start fade earlier */
+        }
+
+        /* Footer div containing the link text */
+        .daily-tarot-footer {
+            margin-top: auto; /* Push to bottom */
+            padding-top: 0.5rem; /* Space above the link */
+            text-align: right; /* Align link text to the right */
+        }
+
+        .read-more-text { /* The SPAN containing the text */
+            display: inline-block;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .daily-tarot-preview:hover .read-more-text { /* Change on whole block hover */
             color: var(--text-color);
         }
 
-        .logo {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 40px auto;
-            border-radius: 50%;
-            background-image: url('/assets/logo.webp');
-            background-size: cover;
-            background-position: center;
-            border: 4px solid var(--accent-color);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .read-more-text i {
+            margin-left: 0.3em;
+            font-size: 0.8em;
+            vertical-align: middle; /* Align icon better */
         }
 
-        .logo:hover {
-            transform: scale(1.1); /* Slightly enlarges the logo */
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); /* Increases the shadow intensity */
-        }
 
-        .button {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
-            font-weight: bold;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            transform: scale(1.05);
-        }
-
-        .section {
-            background-color: rgba(26, 0, 51, 0.7);
-            position: relative;
-            z-index: 1;
-            padding: 80px 0;
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            width: 48px;
-            height: 48px;
-        }
-
-        .testimonial {
-            background-color: rgba(75, 0, 130, 0.6);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .faq-item {
-            margin-bottom: 20px;
-        }
-
-        .faq-question {
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        footer {
-            background-color: rgba(26, 0, 51, 0.9);
-            padding: 40px 0;
-        }
-
+        /* --- Responsive Adjustments --- */
         @media screen and (max-width: 768px) {
-            .logo {
-                width: 150px;
-                height: 150px;
-            }
+            .logo { width: 150px; height: 150px; margin-bottom: 30px; }
+            .title.is-1 { font-size: 2.5rem; }
+            .subtitle.is-3 { font-size: 1.5rem; }
+            .section { padding: 60px 1rem; }
 
-            .title.is-1 {
-                font-size: 2.5rem;
-            }
-
-            .subtitle.is-3 {
-                font-size: 1.5rem;
-            }
+            .daily-tarot-preview { padding: 1rem 1.2rem; max-width: 95%; flex-direction: column; /* Stack columns */ align-items: center; /* Center items when stacked */ gap: 1rem;}
+            .daily-tarot-image-column { flex-basis: auto; width: 160px; /* Keep reasonable width when stacked */ margin-bottom: 0.5rem; }
+            .daily-tarot-text-column { width: 100%; text-align: center; }
+            .daily-tarot-footer { text-align: center; } /* Center link on mobile */
+            .daily-tarot-text-column .card-name { font-size: 1.5rem; }
+            .interpretation-excerpt { font-size: 0.95rem; max-height: 5.7em; /* Approx 4 lines */ margin-bottom: 1rem; }
         }
 
-        .hero {
-            background: url('/assets/bg2.webp') no-repeat center left;
-            background-size: cover;
-        }
+        @media screen and (max-width: 480px) {
+            .hero .title.is-1 { font-size: 2.2rem; }
+            .hero .subtitle.is-3 { font-size: 1.3rem; }
+            .button.is-large { font-size: 1.1rem; }
 
-        .hero-body, .hero-foot {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .section.testimonials {
-            background: url('/assets/bg1.webp') no-repeat center center;
-            background-size: cover;
-        }
-
-        .bg2 {
-            background: url('/assets/bg2.webp') no-repeat bottom center;
-            background-size: cover;
-        }
-
-        .tariff-card {
-            position: relative;
-            background-color: rgba(75, 0, 130, 0.6);
-            border-radius: 10px;
-            color: var(--text-color);
-        }
-
-        .tariff-card .card-footer {
-            background-color: transparent;
-            border-top: none;
-        }
-
-        .tariff-icon {
-            width: 128px;
-            height: 128px;
-            border-radius: 50%;
-            border: 4px solid var(--accent-color);
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-
-        .tariff-card .button {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
-            font-weight: bold;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .tariff-card .button:hover {
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            transform: scale(1.05);
-        }
-
-        .commercial-badge {
-            position: absolute;
-            top: 10px;
-            right: -40px;
-            transform: rotate(38deg);
-            z-index: 1;
-            background: url('/assets/bg1.webp') no-repeat left center;
-            padding: 10px;
-            font-weight: bold;
-            border-radius: 5px;
-            text-align: center;
-            height: 60px;
-
-            font-size: 14px;
-        }
-
-        .horoscope-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            position: relative;
-            transition: all 0.3s ease;
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
-
-        .horoscope-link:hover {
-            color: var(--text-color);
-            text-shadow: 0 0 8px var(--accent-color);
-        }
-
-        .horoscope-link::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: var(--accent-color);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            opacity: 0;
-        }
-
-        .horoscope-link:hover::before {
-            width: 80%;
-            opacity: 1;
+            .daily-tarot-preview { padding: 1rem; }
+            .daily-tarot-image-column { width: 140px; }
+            .daily-tarot-text-column .card-name { font-size: 1.4rem; }
+            .interpretation-excerpt { font-size: 0.9rem; max-height: 5.4em; /* Approx 4 lines */ }
         }
     </style>
 </head>
 <body>
+{% assign latest_card = site.tarot | sort: 'date' | last %}
+
 <section class="hero is-fullheight">
     <div class="hero-body">
-        <div class="container has-text-centered is-max-tablet">
-            <a href="tg://resolve?domain=mystaro_bot&start=logo_click">
+        <div class="container has-text-centered is-max-desktop">
+            <a href="tg://resolve?domain={{ site.telegram_bot }}&start=logo_click">
                 <div class="logo"></div>
             </a>
             <h1 class="title is-1">Мадам Мистаро</h1>
             <h2 class="subtitle is-3">Ваш проводник в мир Таро</h2>
             <p class="is-size-5 mb-5">Погрузитесь в тайны карт и получите персональный расклад Таро прямо сейчас с помощью нашего уникального Telegram-бота.</p>
-            <a href="tg://resolve?domain=mystaro_bot&start=landing_top" class="button is-large is-rounded">Сделать расклад бесплатно</a>
-            <div class="mt-4">
-                <a href="/гороскопы" class="horoscope-link has-text-warning is-size-5 has-text-weight-medium hover:underline">Посмотреть гороскоп на сегодня</a>
+            <a href="tg://resolve?domain={{ site.telegram_bot }}&start=landing_top" class="button is-large is-rounded mb-5">
+                Сделать расклад бесплатно
+            </a>
+
+            <!-- Enhanced Clickable Daily Tarot Card Preview Section -->
+            <div class="mt-5">
+                <!-- The entire block is the link -->
+                <a href="{{ latest_card.url | relative_url }}" class="daily-tarot-preview" title="Посмотреть Карту Дня: {{ latest_card.card_name }}">
+
+                    <!-- Image Column -->
+                    <div class="daily-tarot-image-column">
+                        {% if latest_card.card_image and latest_card.card_image != "" %}
+                        {% responsive_image_block %}
+                        path: {{ latest_card.card_image | strip | remove_first: "/" }}
+                        alt: Карта Дня - {{ latest_card.card_name | escape }}
+                        class: daily-tarot-thumbnail
+                        {% endresponsive_image_block %}
+                        {% else %}
+                        <img src="/assets/images/tarot/placeholder-thumb.jpg" alt="Карта Дня" class="daily-tarot-thumbnail">
+                        {% endif %}
+                    </div>
+
+                    <!-- Text Column -->
+                    <div class="daily-tarot-text-column">
+                        <div class="daily-tarot-text-main"> <!-- Added wrapper for top content + excerpt -->
+                            <p class="heading">Карта Дня</p>
+                            <p class="card-name">
+                                {{ latest_card.card_name }}
+                            </p>
+                            {% if latest_card.interpretation %}
+                            <div class="interpretation-excerpt">
+                                {{ latest_card.interpretation | markdownify | strip_html | normalize_whitespace }}
+                                <!-- Fade element moved inside here -->
+<!--                                <span class="fade-overlay"></span>-->
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="daily-tarot-footer"> <!-- Wrapper for the 'Read More' link -->
+                            <span class="read-more-text">
+                                Читать далее <i class="fas fa-arrow-right fa-xs"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                </a> <!-- End of clickable block -->
             </div>
+            <!-- End Enhanced Daily Tarot Card Preview Section -->
+
         </div>
     </div>
     <div class="hero-foot">
-        <div class="content has-text-grey is-size-7-mobile">
+        <div class="content has-text-grey is-size-7">
             Пользуясь сервисом вы подтверждаете, что вам есть 18 лет и вы соглашаетесь с <a class="has-text-grey" href="/оферта">договором оферты</a>
         </div>
     </div>
 </section>
 
-<section class="section">
+<!-- Added class for consistent background -->
+<section class="section section-transparent-bg">
     <div class="container">
         <h3 class="title is-2 has-text-centered mb-6">Откройте Завесу Тайн</h3>
-        <div class="columns is-multiline">
-            <div class="column is-4 has-text-centered">
-                    <span class="icon feature-icon">
-                        <i class="fas fa-magic"></i>
-                    </span>
+        <div class="columns is-multiline is-centered"> <!-- Center columns wrapper -->
+            <div class="column is-4-desktop is-6-tablet has-text-centered">
+                <span class="icon feature-icon">
+                    <i class="fas fa-magic fa-fw"></i> <!-- Added fa-fw for fixed width -->
+                </span>
                 <h4 class="title is-4">Мгновенные Предсказания</h4>
                 <p>Получайте глубокие прозрения сразу после вашего запроса.</p>
             </div>
-            <div class="column is-4 has-text-centered">
-                    <span class="icon feature-icon">
-                        <i class="fas fa-user-circle"></i>
-                    </span>
+            <div class="column is-4-desktop is-6-tablet has-text-centered">
+                <span class="icon feature-icon">
+                    <i class="fas fa-user-circle fa-fw"></i>
+                </span>
                 <h4 class="title is-4">Персональный Подход</h4>
                 <p>Каждый расклад уникален и адаптирован под ваши личные запросы.</p>
             </div>
-            <div class="column is-4 has-text-centered">
-                    <span class="icon feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </span>
+            <div class="column is-4-desktop is-6-tablet has-text-centered">
+                <span class="icon feature-icon">
+                    <i class="fas fa-shield-alt fa-fw"></i>
+                </span>
                 <h4 class="title is-4">Полная Конфиденциальность</h4>
                 <p>Ваши вопросы и предсказания остаются строго между вами и картами.</p>
             </div>
-            <div class="column is-4 has-text-centered">
-                    <span class="icon feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </span>
+            <div class="column is-4-desktop is-6-tablet has-text-centered">
+                <span class="icon feature-icon">
+                    <i class="fas fa-clock fa-fw"></i>
+                </span>
                 <h4 class="title is-4">Доступно 24/7</h4>
                 <p>Получайте ответы в любое время дня и ночи.</p>
             </div>
-            <div class="column is-4 has-text-centered">
+            <div class="column is-4-desktop is-6-tablet has-text-centered">
                 <span class="icon feature-icon">
-                    <i class="fas fa-compass"></i>
+                    <i class="fas fa-compass fa-fw"></i>
                 </span>
                 <h4 class="title is-4">Ориентир для Будущего</h4>
                 <p>Предсказания помогают лучше понять ваш путь и принять важные решения.</p>
             </div>
-            <div class="column is-4 has-text-centered">
-                    <span class="icon feature-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </span>
+            <div class="column is-4-desktop is-6-tablet has-text-centered">
+                <span class="icon feature-icon">
+                    <i class="fas fa-lightbulb fa-fw"></i>
+                </span>
                 <h4 class="title is-4">Глубокие Инсайты</h4>
                 <p>Не просто предсказания, а мудрые советы для вашего пути.</p>
             </div>
@@ -322,20 +343,20 @@
 <section class="section testimonials">
     <div class="container">
         <h3 class="title is-2 has-text-centered mb-6">Отзывы Наших Клиентов</h3>
-        <div class="columns is-multiline">
-            <div class="column is-4">
+        <div class="columns is-multiline is-centered"> <!-- Center columns -->
+            <div class="column is-4-desktop is-6-tablet">
                 <div class="testimonial">
                     <p>"Мадам Мистаро открыла мне глаза на ситуацию, которую я не могла разрешить годами. Спасибо за точность и глубину!"</p>
                     <p class="has-text-right">- Анна К.</p>
                 </div>
             </div>
-            <div class="column is-4">
+            <div class="column is-4-desktop is-6-tablet">
                 <div class="testimonial">
                     <p>"Я скептически относился к онлайн-гаданиям, но Мадам Мистаро меня удивила. Она помогла мне понять свои чувства и принять осознанные решения. Это невероятный опыт."</p>
                     <p class="has-text-right">- Михаил Д.</p>
                 </div>
             </div>
-            <div class="column is-4">
+            <div class="column is-4-desktop is-6-tablet">
                 <div class="testimonial">
                     <p>"Использую бот каждый день для получения совета. С помощью Мадам Мистаро я поняла, как лучше справляться с повседневными проблемами. Её советы всегда дают пищу для размышлений."</p>
                     <p class="has-text-right">- Елена С.</p>
@@ -345,7 +366,8 @@
     </div>
 </section>
 
-<section class="section">
+<!-- Added class for consistent background -->
+<section class="section section-transparent-bg">
     <div class="container">
         <h3 class="title is-2 has-text-centered mb-6">Часто Задаваемые Вопросы</h3>
         <div class="columns is-multiline">
@@ -378,15 +400,15 @@
 </section>
 
 <!-- Tariffs Section -->
-<section class="section">
+<section class="section tariffs"> <!-- Added specific class -->
     <div class="container">
-        <h3 class="title is-2 has-text-centered mb-6">Наши Тарифы</h3>
-        <div class="columns is-multiline is-variable is-1-desktop">
+        <h3 class="title is-2 has-text-centered mb-6">Поддержите Проект</h3>
+        <div class="columns is-multiline is-variable is-1-desktop is-centered"> <!-- Centered columns -->
             <!-- Star Seeker Tariff -->
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
+            <div class="column is-one-quarter-desktop is-half-tablet">
                 <div class="card tariff-card">
                     <div class="card-image has-text-centered">
-                        <figure class="image is-128x128 is-inline-block mt-4">
+                        <figure class="image is-128x128 is-inline-block">
                             <img src="/assets/tariffs/star_seeker.webp" alt="Звёздный Искатель" class="tariff-icon">
                         </figure>
                     </div>
@@ -396,14 +418,18 @@
                         <span class="is-size-5">за 300 гаданий</span>
                         <small>(10 в день)</small>
                     </div>
+                    <!-- Add Buy Button if needed -->
+                    <!-- <div class="p-4 has-text-centered"> -->
+                    <!--     <a href="LINK_TO_BUY_STAR_SEEKER" class="button is-rounded">Купить</a> -->
+                    <!-- </div> -->
                 </div>
             </div>
 
             <!-- Moon Oracle Tariff -->
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
+            <div class="column is-one-quarter-desktop is-half-tablet">
                 <div class="card tariff-card">
                     <div class="card-image has-text-centered">
-                        <figure class="image is-128x128 is-inline-block mt-4">
+                        <figure class="image is-128x128 is-inline-block">
                             <img src="/assets/tariffs/moon_oracle.webp" alt="Лунный Оракул" class="tariff-icon">
                         </figure>
                     </div>
@@ -417,10 +443,10 @@
             </div>
 
             <!-- Sun Master Tariff -->
-            <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
+            <div class="column is-one-quarter-desktop is-half-tablet">
                 <div class="card tariff-card">
                     <div class="card-image has-text-centered">
-                        <figure class="image is-128x128 is-inline-block mt-4">
+                        <figure class="image is-128x128 is-inline-block">
                             <img src="/assets/tariffs/sun_master.webp" alt="Солнечный Магистр" class="tariff-icon">
                         </figure>
                     </div>
@@ -436,12 +462,11 @@
             <!-- Galactic Herald Tariff -->
             <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
                 <div class="card tariff-card">
-                    <!-- Badge for commercial use -->
                     <div class="commercial-badge">
                         Коммерческое<br>использование!
                     </div>
                     <div class="card-image has-text-centered">
-                        <figure class="image is-128x128 is-inline-block mt-4">
+                        <figure class="image is-128x128 is-inline-block">
                             <img src="/assets/tariffs/galactic_herald.webp" alt="Галактический Вестник" class="tariff-icon">
                         </figure>
                     </div>
@@ -462,7 +487,7 @@
     <div class="container has-text-centered">
         <h3 class="title is-2 mb-6">Готовы Заглянуть в Будущее?</h3>
         <p class="is-size-5 mb-5">Не упустите шанс получить ответы на ваши самые важные вопросы. Мадам Мистаро ждет вас!</p>
-        <a href="tg://resolve?domain=mystaro_bot&start=landing_bottom" class="button is-large is-rounded">Начать гадание</a>
+        <a href="tg://resolve?domain={{ site.telegram_bot }}&start=landing_bottom" class="button is-large is-rounded">Начать гадание</a>
     </div>
 </section>
 </body>
