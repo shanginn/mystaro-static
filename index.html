@@ -257,15 +257,13 @@
                     <!-- Text Column -->
                     <div class="daily-tarot-text-column">
                         <div class="daily-tarot-text-main"> <!-- Added wrapper for top content + excerpt -->
-                            <p class="heading">Карта Дня</p>
+                            <p class="heading">Карта Дня {{ latest_card.date | date: "%d.%m.%Y" }}</p>
                             <p class="card-name">
                                 {{ latest_card.card_name }}
                             </p>
                             {% if latest_card.interpretation %}
                             <div class="interpretation-excerpt">
                                 {{ latest_card.interpretation | markdownify | strip_html | normalize_whitespace }}
-                                <!-- Fade element moved inside here -->
-<!--                                <span class="fade-overlay"></span>-->
                             </div>
                             {% endif %}
                         </div>
