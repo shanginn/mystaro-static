@@ -5,6 +5,14 @@
     <title>{{ page.card_name | default: page.title }} - Карта Дня {{ page.date | date: "%d.%m.%Y" }} | {{ site.title }}</title>
     <meta name="description" content="{{ page.interpretation | strip_html | truncatewords: 30 | default: site.description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ page.card_name | default: page.title }} - Карта Дня {{ page.date | date: "%d.%m.%Y" }}">
+    <meta property="og:description" content="{{ page.interpretation | strip_html | truncatewords: 30 | default: site.description }}">
+    <meta property="og:image" content="{{ site.url }}{{ page.card_image | default: '/assets/logo.webp' }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="{{ site.title }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
