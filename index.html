@@ -193,6 +193,23 @@
         }
 
 
+        /* Mobile header layout */
+        .mobile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .mobile-logo-link {
+            display: inline-block;
+        }
+
+        .mobile-titles {
+            display: inline-block;
+        }
+
         /* --- Responsive Adjustments --- */
         @media screen and (max-width: 768px) {
             .logo { width: 150px; height: 150px; margin-bottom: 30px; }
@@ -200,18 +217,64 @@
             .subtitle.is-3 { font-size: 1.5rem; }
             .section { padding: 60px 1rem; }
 
-            .daily-tarot-preview { padding: 1rem 1.2rem; max-width: 95%; flex-direction: column; /* Stack columns */ align-items: center; /* Center items when stacked */ gap: 1rem;}
-            .daily-tarot-image-column { flex-basis: auto; width: 160px; /* Keep reasonable width when stacked */ margin-bottom: 0.5rem; }
-            .daily-tarot-text-column { width: 100%; text-align: center; }
-            .daily-tarot-footer { text-align: center; } /* Center link on mobile */
-            .daily-tarot-text-column .card-name { font-size: 1.5rem; }
-            .interpretation-excerpt { font-size: 0.95rem; max-height: 5.7em; /* Approx 4 lines */ margin-bottom: 1rem; }
+            /* Mobile-specific header layout */
+            .mobile-header {
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+                gap: 1rem;
+                justify-content: flex-start;
+            }
+            
+            .container.has-text-centered .mobile-header {
+                justify-content: flex-start;
+            }
+            
+            .container.has-text-centered .header-text {
+                text-align: left;
+            }
+            
+            .logo { 
+                width: 60px; 
+                height: 60px; 
+                margin: 0; 
+            }
+            
+            /* Daily tarot preview adjustments for mobile */
+            .daily-tarot-preview { 
+                padding: 1rem 1.2rem; 
+                max-width: 95%; 
+                flex-direction: column; /* Stack columns */ 
+                align-items: center; /* Center items when stacked */ 
+                gap: 1rem;
+            }
+            .daily-tarot-image-column { 
+                flex-basis: auto; 
+                width: 160px; /* Keep reasonable width when stacked */ 
+                margin-bottom: 0.5rem; 
+            }
+            .daily-tarot-text-column { 
+                width: 100%; 
+                text-align: center; 
+            }
+            .daily-tarot-footer { 
+                text-align: center; /* Center link on mobile */
+            } 
+            .daily-tarot-text-column .card-name { 
+                font-size: 1.5rem; 
+            }
+            .interpretation-excerpt { 
+                font-size: 0.95rem; 
+                max-height: 5.7em; /* Approx 4 lines */ 
+                margin-bottom: 1rem; 
+            }
         }
 
         @media screen and (max-width: 480px) {
             .hero .title.is-1 { font-size: 2.2rem; }
             .hero .subtitle.is-3 { font-size: 1.3rem; }
             .button.is-large { font-size: 1.1rem; }
+            .logo { width: 50px; height: 50px; }
 
             .daily-tarot-preview { padding: 1rem; }
             .daily-tarot-image-column { width: 140px; }
@@ -226,11 +289,15 @@
 <section class="hero is-fullheight">
     <div class="hero-body">
         <div class="container has-text-centered is-max-desktop">
-            <a href="tg://resolve?domain={{ site.telegram_bot }}&start=logo_click">
-                <div class="logo"></div>
-            </a>
-            <h1 class="title is-1">Мадам Мистаро</h1>
-            <h2 class="subtitle is-3">Ваш проводник в мир Таро</h2>
+            <div class="mobile-header">
+                <a href="tg://resolve?domain={{ site.telegram_bot }}&start=logo_click">
+                    <div class="logo"></div>
+                </a>
+                <div class="header-text">
+                    <h1 class="title is-1">Мадам Мистаро</h1>
+                    <h2 class="subtitle is-3">Ваш проводник в мир Таро</h2>
+                </div>
+            </div>
             <p class="is-size-5 mb-5">Погрузитесь в тайны карт и получите персональный расклад Таро прямо сейчас с помощью нашего уникального Telegram-бота.</p>
             <a href="tg://resolve?domain={{ site.telegram_bot }}&start=landing_top" class="button is-large is-rounded mb-5">
                 Сделать расклад бесплатно
