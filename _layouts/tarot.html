@@ -50,19 +50,22 @@
         .logo-wrapper { padding-top: 1rem; text-align: center; }
         .logo-small { width: 100px; height: 100px; border-radius: 50%; background-image: url('/assets/logo.webp'); background-size: cover; background-position: center; border: 3px solid var(--accent-color); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; display: inline-block; }
         .logo-small:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        
+        /* Mobile Header Layout */
+        .mobile-header { display: flex; flex-direction: column; align-items: center; }
 
         /* Header styles */
-        .header { text-align: center; }
+        .header { text-align: center; margin-top: 2rem; }
         .header-content { max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
-        .header-text .title { font-size: 2.5rem; margin-bottom: 1rem; line-height: 1.2; text-align: center; }
-        .header-text .current-date { font-size: 1.2rem; color: var(--accent-color); margin-top: 0.5rem; }
+        .header-text .title { font-size: 2.5rem; margin-bottom: 0; line-height: 1.2; text-align: center; }
+        .header-text .current-date { font-size: 1.2rem; color: var(--accent-color); }
 
         /* --- Tarot Content Specific Styles --- */
         .tarot-content {
             background: rgba(75, 0, 130, 0.3);
             border-radius: 15px;
-            padding: 3rem; /* Default padding */
-            margin: 2rem auto;
+            padding: 1.5rem 3rem; /* Default padding */
+            margin: 1rem auto;
             max-width: 1000px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
@@ -143,6 +146,7 @@
 
         /* Media Queries - Now mostly for font sizes, padding, etc. */
         @media screen and (max-width: 768px) { /* Affects mobile only */
+            .header { margin-top: 1rem; }
             .header-text .title { font-size: 2rem; }
             .tarot-content { padding: 1.5rem; margin: 1rem; } /* Adjust padding on smaller screens */
             .card-name { font-size: 1.8rem; margin-bottom: 1rem !important; }
@@ -150,6 +154,25 @@
             .additional-content .content { font-size: 1rem; }
             .telegram-button { font-size: 1.2rem; padding: 1rem 2rem; }
             .date-navigation { margin-top: 1.5rem; }
+            
+            /* Mobile-specific header layout */
+            .mobile-header {
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+                gap: 1rem;
+                justify-content: flex-start;
+            }
+
+            .logo-small {
+                width: 60px;
+                height: 60px;
+                margin: 0;
+            }
+
+            .header-text {
+                text-align: left;
+            }
         }
         @media screen and (max-width: 1023px) { /* Affects mobile AND tablet */
             .tarot-content { padding: 2rem; } /* Slightly more padding on tablet than mobile */
@@ -158,18 +181,17 @@
     </style>
 </head>
 <body>
-<div class="logo-wrapper">
-    <a href="/" title="На главную" class="logo-link">
-        <div class="logo-small" role="img" aria-label="Мадам Мистаро логотип"></div>
-    </a>
-</div>
-
 <div class="container">
     <div class="header">
         <div class="header-content">
-            <div class="header-text">
-                <h1 class="title">Карта Дня</h1>
-                <div class="current-date">{{ page.date | date: "%d.%m.%Y" }}</div>
+            <div class="mobile-header">
+                <a href="/" title="На главную" class="logo-link">
+                    <div class="logo-small" role="img" aria-label="Мадам Мистаро логотип"></div>
+                </a>
+                <div class="header-text">
+                    <h1 class="title">Карта Дня</h1>
+                    <div class="current-date">{{ page.date | date: "%d.%m.%Y" }}</div>
+                </div>
             </div>
         </div>
     </div>
