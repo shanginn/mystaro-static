@@ -24,6 +24,11 @@ collections:
     # Permalink uses URL encoding for "карта-дня"
     permalink: /%D0%BA%D0%B0%D1%80%D1%82%D0%B0-%D0%B4%D0%BD%D1%8F/:year/:month/:day/
     sort_by: date
+  blog:
+    output: true
+    # Permalink uses URL encoding for "блог"
+    permalink: /%D0%B1%D0%BB%D0%BE%D0%B3/:title/
+    sort_by: date
 
 defaults:
   -
@@ -40,6 +45,14 @@ defaults:
       type: "tarot"
     values:
       layout: "tarot"
+      lang: "ru"
+      author: "Мадам Мистаро"
+  -
+    scope:
+      path: ""
+      type: "blog"
+    values:
+      layout: "blog"
       lang: "ru"
       author: "Мадам Мистаро"
 

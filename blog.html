@@ -1,0 +1,272 @@
+---
+layout: default
+title: "Блог о Таро - Мистические знания и практики"
+description: "Изучайте Таро с экспертами. Статьи о значении карт, раскладах, техниках гадания и эзотерических практиках."
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="{{ page.title }} | {{ site.title }}">
+    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:image" content="{{ site.url }}/assets/logo.webp">
+    <meta property="og:url" content="{{ site.url }}/blog/">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+    <style>
+        @import "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap";
+        @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+
+        :root {
+            --primary-color: #8A2BE2;
+            --secondary-color: #4B0082;
+            --accent-color: #FFD700;
+            --text-color: #FFFFFF;
+            --background-color: #1A0033;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, .title, .subtitle {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color);
+        }
+
+        .logo-small {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-image: url('/assets/logo.webp');
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .logo-small:hover { transform: scale(1.1); }
+
+        .header {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .blog-card {
+            background: rgba(75, 0, 130, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .blog-card h3 {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-card p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .blog-meta {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .blog-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: var(--secondary-color) !important;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .blog-link:hover {
+            background-color: var(--primary-color);
+            color: var(--text-color) !important;
+            transform: scale(1.05);
+        }
+
+        .featured-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .featured-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .telegram-cta {
+            background: rgba(75, 0, 130, 0.5);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .telegram-button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background-color: var(--accent-color);
+            color: var(--secondary-color) !important;
+            font-weight: bold;
+            border: none;
+            border-radius: 9999px;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .telegram-button:hover {
+            background-color: var(--primary-color);
+            color: var(--text-color) !important;
+            transform: scale(1.05);
+        }
+
+        @media screen and (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .blog-container {
+                padding: 0 0.5rem;
+            }
+            .blog-card {
+                padding: 1.5rem;
+            }
+            .featured-section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="blog-container">
+    <div class="header">
+        <a href="/" title="На главную">
+            <div class="logo-small"></div>
+        </a>
+        <h1 class="title is-2">Блог о Таро</h1>
+        <p class="subtitle">Глубокие знания и практические советы от экспертов</p>
+    </div>
+
+    <div class="featured-section">
+        <h2>Изучайте Таро с профессионалами</h2>
+        <p>Откройте для себя мир древней мудрости через наши экспертные статьи. От базовых знаний до продвинутых техник — все для вашего духовного роста.</p>
+        <a href="/articles/" style="display: inline-block; margin-top: 1rem; padding: 0.75rem 1.5rem; background-color: rgba(255,255,255,0.1); color: var(--accent-color); text-decoration: none; border-radius: 25px; border: 2px solid var(--accent-color); transition: all 0.3s ease;">
+            <i class="fas fa-list"></i> Посмотреть все статьи
+        </a>
+    </div>
+
+    <div class="blog-grid">
+        {% assign sorted_posts = site.blog | sort: 'date' | reverse %}
+        {% for post in sorted_posts %}
+        <article class="blog-card">
+            <div class="blog-meta">
+                <i class="fas fa-calendar"></i> {{ post.date | date: "%d.%m.%Y" }}
+                {% if post.reading_time %}
+                <span style="margin-left: 1rem;"><i class="fas fa-clock"></i> {{ post.reading_time }} мин</span>
+                {% endif %}
+            </div>
+
+            <h3>{{ post.title }}</h3>
+
+            {% if post.subtitle %}
+            <p><strong>{{ post.subtitle }}</strong></p>
+            {% endif %}
+
+            <p>{{ post.description }}</p>
+
+            {% if post.keywords %}
+            <div class="tags">
+                {% for keyword in post.keywords limit:3 %}
+                <span class="tag is-small" style="background-color: var(--accent-color); color: var(--secondary-color);">{{ keyword }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <a href="{{ post.url | relative_url }}" class="blog-link">
+                Читать статью <i class="fas fa-arrow-right"></i>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+
+    <div class="telegram-cta">
+        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">
+            Получите персональное гадание на Таро
+        </h3>
+        <p>
+            Наш Telegram бот поможет вам получить индивидуальные ответы на любые вопросы.
+            Профессиональные расклады и личные консультации доступны 24/7.
+        </p>
+        <a href="tg://resolve?domain={{ site.telegram_bot }}&start=blog_main" class="telegram-button">
+            <i class="fab fa-telegram-plane"></i> Перейти к @{{ site.telegram_bot }}
+        </a>
+    </div>
+</div>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(98489625, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+    });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/98489625" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html>
